@@ -99,6 +99,7 @@ import IconClose from '../../icons/IconClose.vue'
       padding: 8px 12px;
       border-radius: 4px;
       background: #f6f6f9;
+      cursor: pointer;
     }
   }
 
