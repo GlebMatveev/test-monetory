@@ -3,6 +3,7 @@ import AppVHeader from './components/app/VHeader.vue'
 import AppVFooter from './components/app/VFooter.vue'
 
 import UiButtonsVBtn from './components/ui/buttons/VBtn.vue'
+import UiInputsVInput from './components/ui/inputs/VInput.vue'
 </script>
 
 <template>
@@ -11,6 +12,8 @@ import UiButtonsVBtn from './components/ui/buttons/VBtn.vue'
   <main class="main">
     <div class="container">
       <UiButtonsVBtn theme="primary"> Сохранить </UiButtonsVBtn>
+
+      <UiInputsVInput theme="primary" placeholder="Название тега" />
     </div>
   </main>
 
