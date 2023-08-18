@@ -10,7 +10,7 @@ import UiButtonsVBtn from './components/ui/buttons/VBtn.vue'
 
   <main class="main">
     <div class="container">
-      <UiButtonsVBtn theme="primary" title="Сохранить" />
+      <UiButtonsVBtn theme="primary"> Сохранить </UiButtonsVBtn>
     </div>
   </main>
 

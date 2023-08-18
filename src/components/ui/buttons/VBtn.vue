@@ -2,7 +2,6 @@
 // Props
 const props = defineProps({
   theme: String,
-  title: String,
   height: String,
   width: String,
   border: String,
@@ -22,7 +21,7 @@ const props = defineProps({
     }"
     :style="`height: ${props.height}; width: ${props.width}; border: ${props.border}; border-radius: ${props.borderRadius}; padding: ${props.padding};`"
   >
-    {{ props.title }}
+    <slot></slot>
   </button>
 </template>
 
