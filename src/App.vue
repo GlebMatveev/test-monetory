@@ -4,6 +4,7 @@ import AppVFooter from './components/app/VFooter.vue'
 
 import UiButtonsVBtn from './components/ui/buttons/VBtn.vue'
 import UiInputsVInput from './components/ui/inputs/VInput.vue'
+import AddingTags from './components/ui/modals/AddingTags.vue'
 </script>
 
 <template>
@@ -14,6 +15,8 @@ import UiInputsVInput from './components/ui/inputs/VInput.vue'
       <UiButtonsVBtn theme="primary"> Сохранить </UiButtonsVBtn>
 
       <UiInputsVInput theme="primary" placeholder="Название тега" />
+
+      <AddingTags />
     </div>
   </main>
 
