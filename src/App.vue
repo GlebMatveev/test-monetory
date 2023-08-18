@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import AppVHeader from './components/app/VHeader.vue'
 import AppVFooter from './components/app/VFooter.vue'
+
+import UiButtonsVBtn from './components/ui/buttons/VBtn.vue'
 </script>
 
 <template>
@@ -8,7 +10,7 @@ import AppVFooter from './components/app/VFooter.vue'
 
   <main class="main">
     <div class="container">
-      <p>main</p>
+      <UiButtonsVBtn theme="primary" title="Сохранить" />
     </div>
   </main>
 
