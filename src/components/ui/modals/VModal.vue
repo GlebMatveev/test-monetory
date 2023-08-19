@@ -1,8 +1,10 @@
 <script setup lang="ts">
+// Pinia stores
+import { useModalStore } from '../../../stores/modal'
+const modalStore = useModalStore()
+
 // Props
 const props = defineProps({
-  show: Boolean,
-  modal: Object,
   width: String,
   height: String,
   borderRadius: String,
@@ -12,9 +14,9 @@ const props = defineProps({
 
 <template>
   <Teleport to="body">
-    <div v-if="show" class="modal__overlay">
+    <div v-if="modalStore.isVisible" @click.self="modalStore.closeModal()" class="modal__overlay">
       <div
-        v-if="props.show"
+        v-if="modalStore.isVisible"
         class="modal"
         :style="`width: ${props.width}; height: ${props.height};  border-radius: ${props.borderRadius}; padding: ${props.padding};`"
       >
@@ -29,9 +31,8 @@ const props = defineProps({
   background: #ffffff;
   border-radius: 10px;
   background: #fff;
-  width: 540px;
-  height: 501px;
-  margin-top: 5%;
+  height: fit-content;
+  margin-top: 10%;
 
   &__overlay {
     position: fixed;

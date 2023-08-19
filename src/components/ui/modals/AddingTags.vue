@@ -3,6 +3,10 @@ import UiInputsVInput from '../inputs/VInput.vue'
 import UiButtonsVBtn from '../buttons/VBtn.vue'
 
 import IconClose from '../../icons/IconClose.vue'
+
+// Pinia stores
+import { useModalStore } from '../../../stores/modal'
+const modalStore = useModalStore()
 </script>
 
 <template>
@@ -36,7 +40,7 @@ import IconClose from '../../icons/IconClose.vue'
 
     <div class="tags__footer">
       <UiButtonsVBtn theme="primary">Сохранить</UiButtonsVBtn>
-      <UiButtonsVBtn theme="gray">Отмена</UiButtonsVBtn>
+      <UiButtonsVBtn theme="gray" @click="modalStore.closeModal()">Отмена</UiButtonsVBtn>
     </div>
   </div>
 </template>
