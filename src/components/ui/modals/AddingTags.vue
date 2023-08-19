@@ -84,7 +84,8 @@ function searchTag(word) {
           {{ item }}
         </li>
       </ul>
-      <p class="tags__description" v-else>К сожалению, больше нельзя добавлять теги.</p>
+      <p class="tags__description-message" v-else>К сожалению, больше нельзя добавлять теги.</p>
+
       <p class="tags__description" v-if="word.length > 1 && searchTags.length <= 0">
         По запросу ничего не найдено
       </p>
@@ -112,10 +113,12 @@ function searchTag(word) {
     padding: 40px 40px 20px;
     border-bottom: 1px solid #ecedf2;
   }
+
   &__body {
     padding: 32px 40px 24px;
     min-height: 144px;
   }
+
   &__footer {
     padding: 24px 40px;
     border-top: 1px solid #ecedf2;
@@ -145,6 +148,10 @@ function searchTag(word) {
       font-weight: 600;
       color: #404144;
     }
+
+    &-message {
+      margin-top: 10px;
+    }
   }
 
   &__searching {
@@ -166,6 +173,7 @@ function searchTag(word) {
       background: #f6f6f9;
       cursor: pointer;
     }
+
     &-item:hover {
       color: $color-text-white;
       background: $color-primary;
