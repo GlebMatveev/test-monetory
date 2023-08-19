@@ -106,6 +106,8 @@ function searchTag(word) {
 
 <style lang="scss" scoped>
 .tags {
+  width: 540px;
+
   &__header {
     padding: 40px 40px 20px;
     border-bottom: 1px solid #ecedf2;
@@ -195,6 +197,21 @@ function searchTag(word) {
       &-icon {
         cursor: pointer;
       }
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .tags {
+    width: 100vw;
+    height: 100vh;
+
+    &__searching {
+      overflow: auto;
+    }
+
+    &__added {
+      margin-top: auto;
     }
   }
 }

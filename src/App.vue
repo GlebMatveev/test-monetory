@@ -44,7 +44,7 @@ onMounted(() => {
         </ul>
       </div>
 
-      <UiModalsVModal width="540px">
+      <UiModalsVModal>
         <UiModalsAddingTags />
       </UiModalsVModal>
     </div>
