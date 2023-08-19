@@ -5,6 +5,9 @@ const props = defineProps({
   type: String,
   placeholder: String
 })
+
+// Emits
+const emit = defineEmits(['update:modelValue'])
 </script>
 
 <template>
@@ -15,7 +18,7 @@ const props = defineProps({
       :type="props.type"
       placeholder=""
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="emit('update:modelValue', $event.target.value)"
     />
     <div class="input__background"></div>
     <label for="phone" class="input__placeholder">

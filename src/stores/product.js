@@ -12,8 +12,6 @@ export const useProductStore = defineStore('productStore', () => {
   // Actions
   const getProducts = () => {
     return new Promise((resolve, reject) => {
-      loaderStore.loaderForContent = true
-
       const data = [
         {
           id: 1,
@@ -489,13 +487,12 @@ export const useProductStore = defineStore('productStore', () => {
       ]
       setTimeout(
         () => {
+          loaderStore.loaderForContent = true
           if (Math.random() * 100 < 7) {
             reject({ error: 'Ooops...' })
           } else {
-            resolve(data)
-            products.value = data
+            resolve((products.value = data))
           }
-          loaderStore.loaderForContent = false
         },
         Math.floor(Math.random() * 2000)
       )

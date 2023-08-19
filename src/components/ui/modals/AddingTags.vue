@@ -1,45 +1,104 @@
 <script setup>
-import UiInputsVInput from '../inputs/VInput.vue'
-import UiButtonsVBtn from '../buttons/VBtn.vue'
-
-import IconClose from '../../icons/IconClose.vue'
+// Import
+import { ref, computed } from 'vue'
+import UiInputsVInput from '@/components/ui/inputs/VInput.vue'
+import UiButtonsVBtn from '@/components/ui/buttons/VBtn.vue'
+import IconClose from '@/components/icons/IconClose.vue'
+import tag from '@/helpers/js/tag'
 
 // Pinia stores
-import { useModalStore } from '../../../stores/modal'
+import { useProductStore } from '@/stores/product'
+import { useModalStore } from '@/stores/modal'
+import { useTagStore } from '@/stores/tag'
+const productStore = useProductStore()
 const modalStore = useModalStore()
+const tagStore = useTagStore()
+
+// Variables
+const word = ref('')
+const addedTags = ref([])
+const searchTags = ref([])
+
+// Computed
+const tagsCounter = computed(() => {
+  return 20 - addedTags.value.length
+})
+
+// Functions
+function saveTags(tags) {
+  tagStore.saveTags(tags)
+  modalStore.closeModal()
+}
+
+function searchTag(word) {
+  searchTags.value = []
+
+  if (word.length > 1) {
+    productStore.products.filter((item) => {
+      item.categories.forEach((cat) => {
+        cat.subcategories.forEach((subcat) => {
+          subcat.tags.forEach((t) => {
+            if (t.name.toLowerCase().includes(word.toLowerCase())) {
+              searchTags.value.push(t.name)
+              t.aliases.forEach((alias) => {
+                tag.addTag(searchTags.value, alias)
+              })
+            }
+          })
+        })
+      })
+    })
+  }
+}
 </script>
 
 <template>
   <div class="tags">
     <div class="tags__header">
       <h2 class="tags__title">Добавление тегов</h2>
-      <p class="tags__description">
+      <p class="tags__description" v-if="tagsCounter > 0">
         Вы можете добавить ещё
-        <span class="tags__description-counter">20</span>
+        <span class="tags__description-counter">{{ tagsCounter }}</span>
       </p>
+      <p class="tags__description" v-else>Вы больше не можете добавить теги</p>
     </div>
 
     <div class="tags__body">
-      <UiInputsVInput type="text" placeholder="Название тега" />
+      <UiInputsVInput
+        type="text"
+        placeholder="Название тега"
+        v-model="word"
+        @input="searchTag(word)"
+      />
 
-      <ul class="tags__searching">
-        <li class="tags__searching-item">Стекло</li>
-        <li class="tags__searching-item">Стекло автомобильное</li>
-        <li class="tags__searching-item">Остекление</li>
-        <li class="tags__searching-item">Стеклянная ваза</li>
-        <li class="tags__searching-item">Зеркало</li>
+      <ul class="tags__searching" v-if="tagsCounter > 0">
+        <li
+          class="tags__searching-item"
+          :class="{
+            disabled: tag.calcTagStatus(addedTags, item)
+          }"
+          v-for="(item, index) in searchTags"
+          :key="index"
+          @click="tag.addTag(addedTags, item)"
+        >
+          {{ item }}
+        </li>
       </ul>
+      <p class="tags__description" v-else>К сожалению, больше нельзя добавлять теги.</p>
+      <p class="tags__description" v-if="word.length > 1 && searchTags.length <= 0">
+        По запросу ничего не найдено
+      </p>
     </div>
 
-    <ul class="tags__added">
-      <li class="tags__added-item">
-        <p>Стекло</p>
-        <IconClose class="tags__added-item-icon" />
+    <ul class="tags__added" v-show="addedTags.length > 0">
+      <li class="tags__added-item" v-for="(item, index) in addedTags" :key="index">
+        <p>{{ item }}</p>
+        <IconClose class="tags__added-item-icon" @click="tag.deleteTag(addedTags, item)" />
       </li>
     </ul>
 
     <div class="tags__footer">
-      <UiButtonsVBtn theme="primary">Сохранить</UiButtonsVBtn>
+      <UiButtonsVBtn theme="primary" @click="saveTags(addedTags)">Сохранить</UiButtonsVBtn>
       <UiButtonsVBtn theme="gray" @click="modalStore.closeModal()">Отмена</UiButtonsVBtn>
     </div>
   </div>
@@ -104,6 +163,10 @@ const modalStore = useModalStore()
       border-radius: 4px;
       background: #f6f6f9;
       cursor: pointer;
+    }
+    &-item:hover {
+      color: $color-text-white;
+      background: $color-primary;
     }
   }
 

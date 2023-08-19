@@ -17,5 +17,6 @@ export default defineConfig({
         additionalData: `@import "@/assets/styles/variables.scss";`
       }
     }
-  }
+  },
+  base: '/test-monetory/dist/'
 })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Pinia stores
-import { useModalStore } from '../../../stores/modal'
+import { useModalStore } from '@/stores/modal'
 const modalStore = useModalStore()
 
 // Props
@@ -32,7 +32,9 @@ const props = defineProps({
   border-radius: 10px;
   background: #fff;
   height: fit-content;
-  margin-top: 10%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
 
   &__overlay {
     position: fixed;

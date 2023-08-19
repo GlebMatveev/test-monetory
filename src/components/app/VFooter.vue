@@ -1,5 +1,5 @@
 <script setup>
-import IconTelegram from '../icons/IconTelegram.vue'
+import IconTelegram from '@/components/icons/IconTelegram.vue'
 </script>
 
 <template>
@@ -7,7 +7,7 @@ import IconTelegram from '../icons/IconTelegram.vue'
     <div class="container">
       <div class="footer__wrapper">
         <p class="footer__title">Тестовое задание:</p>
-        <p class="footer__description">приложение для поиска и выбора тегов товаров</p>
+        <p class="footer__description">приложение для поиска и выбора тегов</p>
         <a class="footer__author" href="https://t.me/glebmatveev">
           <IconTelegram class="footer__author-icon" />
           <p class="footer__author-name">Глеб Матвеев</p>
