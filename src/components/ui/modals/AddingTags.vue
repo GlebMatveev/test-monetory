@@ -205,14 +205,7 @@ function searchTag(word) {
   .tags {
     width: 100vw;
     height: 100vh;
-
-    &__searching {
-      overflow: auto;
-    }
-
-    &__added {
-      margin-top: auto;
-    }
+    overflow: scroll;
   }
 }
 </style>
