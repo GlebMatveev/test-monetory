@@ -206,6 +206,7 @@ function searchTag(word) {
     width: 100vw;
     height: 100vh;
     overflow: scroll;
+    padding: 30px 0;
   }
 }
 </style>
