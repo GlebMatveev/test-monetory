@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
 import AppVHeader from './components/app/VHeader.vue'
 import AppVFooter from './components/app/VFooter.vue'
@@ -18,8 +18,15 @@ const tagStore = useTagStore()
 
 // Hooks
 onMounted(() => {
-  productStore.getProducts()
+  productStore.getProducts.then(null, setLoadingError)
 })
+
+// Variables
+const loadingError = ref(false)
+
+function setLoadingError() {
+  loadingError.value = true
+}
 </script>
 
 <template>
@@ -31,9 +38,17 @@ onMounted(() => {
         theme="primary"
         @click="modalStore.openModal()"
         @close="modalStore.closeModal()"
+        :class="{
+          disabled: !productStore.productsStatus
+        }"
       >
         Добавить теги
       </UiButtonsVBtn>
+
+      <p class="main__error" v-if="loadingError">
+        Упс... По какой-то причине данные не загрузились. Пожалуйста, перезагрузите страницу или
+        попробуйте позже.
+      </p>
 
       <div v-if="tagStore.savedTags.length > 0">
         <p class="main__title">Добавленные теги:</p>
@@ -83,6 +98,10 @@ onMounted(() => {
       border-radius: 4px;
       background: #f6f6f9;
     }
+  }
+
+  &__error {
+    padding: 30px 0;
   }
 }
 
